@@ -4,6 +4,7 @@ int main(void) {
     int arr[3][3] ={{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
     int x,y;
     char answer;
+    int c;
     int k,l;
     int i,j;
     int cnt=0;
@@ -36,7 +37,59 @@ int main(void) {
             printf("---|---|---\n");
             printf(" %c | %c | %c \n", arr[i][0], arr[i][1], arr[i][2]);
         }
-        printf("---|---|---");
+        printf("---|---|---\n");
+        for(c=0;c<3;c++){
+            if(arr[c][0] == arr[c][1] && arr[c][0] == arr[c][2]){
+                if(arr[c][0] == 'O'){
+                    printf("1번 플레이어가 승리했습니다.\n");
+                    cnt = 9;
+                    break;
+                }
+                else if(arr[c][0] == 'X'){
+                    printf("2번 플레이어가 승리했습니다.\n");
+                    cnt = 9;
+                    break;
+                }
+            }
+            if(arr[0][c] == arr[1][c] && arr[0][c] == arr[2][c]){
+                if(arr[0][c] == 'O'){
+                    printf("1번 플레이어가 승리했습니다.\n");
+                    cnt = 9;
+                    break;
+                }
+                else if(arr[0][c] == 'X'){
+                    printf("2번 플레이어가 승리했습니다.\n");
+                    cnt = 9;
+                    break;
+                }
+            }
+            if(c == 0){
+                if(arr[c][0] == arr[1][1] && arr[c][0] ==  arr[2][2]){
+                    if(arr[c][0] == 'O'){
+                        printf("1번 플레이어가 승리했습니다.\n");
+                        cnt = 9;
+                        break;
+                    }
+                    else if(arr[c][0] == 'X'){
+                        printf("2번 플레이어가 승리했습니다.\n");
+                        cnt = 9;
+                        break;
+                    }
+                }
+                else if(arr[c][2] == arr[1][1] && arr[c][2] ==  arr[2][0]){
+                    if(arr[c][2] == 'O'){
+                        printf("1번 플레이어가 승리했습니다.\n");
+                        cnt = 9;
+                        break;
+                    }
+                    else if(arr[c][2] == 'X'){
+                        printf("2번 플레이어가 승리했습니다.\n");
+                        cnt = 9;
+                        break;
+                    }
+                }
+            }
+        }
         if(cnt == 9){
             printf("게임이 끝났습니다.\n");
             printf("한 번 더 하시겠습니까? (y/n) : \n");
