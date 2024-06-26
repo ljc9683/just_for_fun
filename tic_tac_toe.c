@@ -1,22 +1,58 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+int arr[3][3] ={{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
 
 int randxy() {
     return rand() % 3;
 }
 
+int ingameWinner(){
+    int c;
+    for (c = 0; c < 3; c++) {
+        if (arr[c][0] == arr[c][1] && arr[c][0] == arr[c][2]) {
+            if (arr[c][0] == 'O') {
+                return 1;
+            }
+            else if (arr[c][0] == 'X') {
+                return 2;
+            }
+        }
+        if (arr[0][c] == arr[1][c] && arr[0][c] == arr[2][c]) {
+            if (arr[0][c] == 'O') {
+                return 1;
+            }
+            else if (arr[0][c] == 'X') {
+                return 2;
+            }
+        }
+        if (c == 0) {
+            if (arr[c][0] == arr[1][1] && arr[c][0] == arr[2][2]) {
+                if (arr[c][0] == 'O') {
+                    return 1;
+                }
+                else if (arr[c][0] == 'X') {
+                    return 2;
+                }
+            } else if (arr[c][2] == arr[1][1] && arr[c][2] == arr[2][0]) {
+                if (arr[c][2] == 'O') {
+                    return 1;
+                }
+                else if (arr[c][2] == 'X') {
+                    return 2;
+                }
+            }
+        }
+    }
+}
+
 int main(void) {
-    int arr[3][3] ={{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
     int x,y;
     int comx,comy;
     char answer;
     int player;
-    int c;
-    int k,l;
-    int i,j;
-    int winner=0;
-    int cnt=0;
+    int i,j,l,k;
+    int winner=0,cnt=0;
     srand(time(NULL));
 
     printf("플레이어의 인원 수를 입력해주세요(1~2) : \n");
@@ -69,61 +105,18 @@ int main(void) {
                 printf("---|---|---\n");
                 printf(" %c | %c | %c \n", arr[i][0], arr[i][1], arr[i][2]);
             }
+
             printf("---|---|---\n");
-            for (c = 0; c < 3; c++) {
-                if (arr[c][0] == arr[c][1] && arr[c][0] == arr[c][2]) {
-                    if (arr[c][0] == 'O') {
-                        printf("플레이어가 승리했습니다.\n");
-                        winner++;
-                        cnt = 9;
-                        break;
-                    } else if (arr[c][0] == 'X') {
-                        printf("컴퓨터가 승리했습니다.\n");
-                        winner++;
-                        cnt = 9;
-                        break;
-                    }
-                }
-                if (arr[0][c] == arr[1][c] && arr[0][c] == arr[2][c]) {
-                    if (arr[0][c] == 'O') {
-                        printf("플레이어가 승리했습니다.\n");
-                        winner++;
-                        cnt = 9;
-                        break;
-                    } else if (arr[0][c] == 'X') {
-                        printf("컴퓨터가 승리했습니다.\n");
-                        winner++;
-                        cnt = 9;
-                        break;
-                    }
-                }
-                if (c == 0) {
-                    if (arr[c][0] == arr[1][1] && arr[c][0] == arr[2][2]) {
-                        if (arr[c][0] == 'O') {
-                            printf("플레이어가 승리했습니다.\n");
-                            winner++;
-                            cnt = 9;
-                            break;
-                        } else if (arr[c][0] == 'X') {
-                            printf("컴퓨터가 승리했습니다.\n");
-                            winner++;
-                            cnt = 9;
-                            break;
-                        }
-                    } else if (arr[c][2] == arr[1][1] && arr[c][2] == arr[2][0]) {
-                        if (arr[c][2] == 'O') {
-                            printf("플레이어가 승리했습니다.\n");
-                            winner++;
-                            cnt = 9;
-                            break;
-                        } else if (arr[c][2] == 'X') {
-                            printf("컴퓨터가 승리했습니다.\n");
-                            winner++;
-                            cnt = 9;
-                            break;
-                        }
-                    }
-                }
+
+            if(ingameWinner(arr) == 1){
+                printf("플레이어가 승리했습니다.\n");
+                winner++;
+                cnt = 9;
+            }
+            else if(ingameWinner(arr) == 2){
+                printf("컴퓨터가 승리했습니다.\n");
+                winner++;
+                cnt = 9;
             }
             if (cnt == 9) {
                 if(winner == 0){
@@ -177,61 +170,18 @@ int main(void) {
                 printf(" %c | %c | %c \n", arr[i][0], arr[i][1], arr[i][2]);
             }
             printf("---|---|---\n");
-            for (c = 0; c < 3; c++) {
-                if (arr[c][0] == arr[c][1] && arr[c][0] == arr[c][2]) {
-                    if (arr[c][0] == 'O') {
-                        printf("1번 플레이어가 승리했습니다.\n");
-                        winner++;
-                        cnt = 9;
-                        break;
-                    } else if (arr[c][0] == 'X') {
-                        printf("2번 플레이어가 승리했습니다.\n");
-                        winner++;
-                        cnt = 9;
-                        break;
-                    }
-                }
-                if (arr[0][c] == arr[1][c] && arr[0][c] == arr[2][c]) {
-                    if (arr[0][c] == 'O') {
-                        printf("1번 플레이어가 승리했습니다.\n");
-                        winner++;
-                        cnt = 9;
-                        break;
-                    } else if (arr[0][c] == 'X') {
-                        printf("2번 플레이어가 승리했습니다.\n");
-                        winner++;
-                        cnt = 9;
-                        break;
-                    }
-                }
-                if (c == 0) {
-                    if (arr[c][0] == arr[1][1] && arr[c][0] == arr[2][2]) {
-                        if (arr[c][0] == 'O') {
-                            printf("1번 플레이어가 승리했습니다.\n");
-                            winner++;
-                            cnt = 9;
-                            break;
-                        } else if (arr[c][0] == 'X') {
-                            printf("2번 플레이어가 승리했습니다.\n");
-                            winner++;
-                            cnt = 9;
-                            break;
-                        }
-                    } else if (arr[c][2] == arr[1][1] && arr[c][2] == arr[2][0]) {
-                        if (arr[c][2] == 'O') {
-                            printf("1번 플레이어가 승리했습니다.\n");
-                            winner++;
-                            cnt = 9;
-                            break;
-                        } else if (arr[c][2] == 'X') {
-                            printf("2번 플레이어가 승리했습니다.\n");
-                            winner++;
-                            cnt = 9;
-                            break;
-                        }
-                    }
-                }
+
+            if(ingameWinner(arr) == 1){
+                printf("1번 플레이어가 승리했습니다.\n");
+                winner++;
+                cnt = 9;
             }
+            else if(ingameWinner(arr) == 2){
+                printf("2번 플레이어가 승리했습니다.\n");
+                winner++;
+                cnt = 9;
+            }
+
             if (cnt == 9) {
                 if(winner == 0){
                     printf("무승부입니다. ");
@@ -255,5 +205,4 @@ int main(void) {
             }
         }
     }
-    return 0;
 }
