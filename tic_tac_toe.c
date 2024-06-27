@@ -46,10 +46,24 @@ int ingameWinner(){
     }
 }
 
+char playAgain(int cnt, int winner) {
+    char answer;
+    if (cnt == 9) {
+        if (winner == 0) {
+            printf("무승부입니다. ");
+        }
+        printf("게임이 끝났습니다.\n");
+        printf("한 번 더 하시겠습니까? (y/n) : \n");
+        scanf(" %c", &answer);
+        return answer;
+    }
+    return ' ';
+}
+
 int main(void) {
     int x,y;
     int comx,comy;
-    char answer;
+    char answer,input;
     int player;
     int i,j,l,k;
     int winner=0,cnt=0;
@@ -118,24 +132,20 @@ int main(void) {
                 winner++;
                 cnt = 9;
             }
-            if (cnt == 9) {
-                if(winner == 0){
-                    printf("무승부입니다. ");
-                }
-                printf("게임이 끝났습니다.\n");
+
+            input = playAgain(cnt,winner);
+
+            if (input == 'n') {
+                printf("게임이 종료되었습니다.");
+                return 0;
+            }
+            else if (input == 'y') {
                 winner = 0;
-                printf("한 번 더 하시겠습니까? (y/n) : \n");
-                scanf(" %c", &answer);
-                if (answer == 'n') {
-                    printf("게임이 종료되었습니다.");
-                    return 0;
-                } else if (answer == 'y') {
-                    cnt = 0;
-                    j = -1;
-                    for (k = 0; k < 3; k++) {
-                        for (l = 0; l < 3; l++) {
-                            arr[k][l] = ' ';
-                        }
+                cnt = 0;
+                j = -1;
+                for (k = 0; k < 3; k++) {
+                    for (l = 0; l < 3; l++) {
+                        arr[k][l] = ' ';
                     }
                 }
             }
@@ -182,24 +192,19 @@ int main(void) {
                 cnt = 9;
             }
 
-            if (cnt == 9) {
-                if(winner == 0){
-                    printf("무승부입니다. ");
-                }
-                printf("게임이 끝났습니다.\n");
+            input = playAgain(cnt,winner);
+
+            if (input == 'n') {
+                printf("게임이 종료되었습니다.");
+                return 0;
+            }
+            else if (input == 'y') {
                 winner = 0;
-                printf("한 번 더 하시겠습니까? (y/n) : \n");
-                scanf(" %c", &answer);
-                if (answer == 'n') {
-                    printf("게임이 종료되었습니다.");
-                    return 0;
-                } else if (answer == 'y') {
-                    cnt = 0;
-                    j = -1;
-                    for (k = 0; k < 3; k++) {
-                        for (l = 0; l < 3; l++) {
-                            arr[k][l] = ' ';
-                        }
+                cnt = 0;
+                j = -1;
+                for (k = 0; k < 3; k++) {
+                    for (l = 0; l < 3; l++) {
+                        arr[k][l] = ' ';
                     }
                 }
             }
